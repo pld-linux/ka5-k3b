@@ -1,18 +1,19 @@
-%define		kdeappsver	17.08.2
+%define		kdeappsver	18.04.0
 %define		qtver		5.3.2
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	17.08.2
+Version:	18.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	8aed00a2a2d11c708e558f11a7fcc128
+# Source0-md5:	46b1c630447dd2eebe2f12e072a66957
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
+BuildRequires:	ffmpeg-devel
 BuildRequires:	flac-c++-devel
 BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
 BuildRequires:	libdvdread-devel
