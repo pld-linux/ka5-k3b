@@ -1,21 +1,22 @@
-%define		kdeappsver	18.12.1
+%define		kdeappsver	19.04.1
+%define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	18.12.1
+Version:	19.04.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	7909afd711ca91fa901ee91ae833c1cf
+# Source0-md5:	6c1900f17b3c9bdb24a15750b162f775
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	ffmpeg-devel
 BuildRequires:	flac-c++-devel
-BuildRequires:	kf5-extra-cmake-modules >= 5.53.0
+BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
 BuildRequires:	libdvdread-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmad-devel
@@ -69,6 +70,7 @@ install -d build
 cd build
 %cmake \
 	-G Ninja \
+	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	..
 %ninja_build
@@ -110,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3blameencoder.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3boggvorbisencoder.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3bsoxencoder.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/kio_videodvd.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/kio/videodvd.so
 %{_desktopdir}/org.kde.k3b.desktop
 %{_iconsdir}/hicolor/128x128/apps/k3b.png
 %{_iconsdir}/hicolor/128x128/mimetypes/application-x-k3b.png
