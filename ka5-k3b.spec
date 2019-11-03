@@ -5,7 +5,7 @@
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
 Version:	19.04.1
-Release:	1
+Release:	2
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
@@ -16,7 +16,11 @@ BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	ffmpeg-devel
 BuildRequires:	flac-c++-devel
+BuildRequires:	ka5-libkcddb-devel
 BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
+BuildRequires:	kf5-kcmutils-devel
+BuildRequires:	kf5-knotifyconfig-devel
+BuildRequires:	kf5-kfilemetadata-devel
 BuildRequires:	libdvdread-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmad-devel
