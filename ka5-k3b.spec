@@ -30,7 +30,9 @@ BuildRequires:	kf5-kdoctools-devel
 BuildRequires:	kf5-kfilemetadata-devel
 BuildRequires:	kf5-ki18n-devel
 BuildRequires:	kf5-kiconthemes-devel
+BuildRequires:	kf5-kio-devel
 BuildRequires:	kf5-kjobwidgets-devel
+BuildRequires:	kf5-knewstuff-devel
 BuildRequires:	kf5-knotifications-devel
 BuildRequires:	kf5-knotifyconfig-devel
 BuildRequires:	kf5-kservice-devel
