@@ -13,26 +13,46 @@ Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5DBus-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= %{qtver}
+BuildRequires:	Qt5WebKit-devel
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	ffmpeg-devel
 BuildRequires:	flac-c++-devel
 BuildRequires:	ka5-libkcddb-devel
 BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
+BuildRequires:	kf5-karchive-devel
 BuildRequires:	kf5-kcmutils-devel
-BuildRequires:	kf5-knotifyconfig-devel
+BuildRequires:	kf5-kcmutils-devel
+BuildRequires:	kf5-kconfig-devel
+BuildRequires:	kf5-kcoreaddons-devel
+BuildRequires:	kf5-kdoctools-devel
 BuildRequires:	kf5-kfilemetadata-devel
+BuildRequires:	kf5-ki18n-devel
+BuildRequires:	kf5-kiconthemes-devel
+BuildRequires:	kf5-kjobwidgets-devel
+BuildRequires:	kf5-knotifications-devel
+BuildRequires:	kf5-knotifyconfig-devel
+BuildRequires:	kf5-kservice-devel
+BuildRequires:	kf5-kwidgetsaddons-devel
+BuildRequires:	kf5-kxmlgui-devel
+BuildRequires:	kf5-solid-devel
+BuildRequires:	lame-libs-devel
 BuildRequires:	libdvdread-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libmpcdec-devel
 BuildRequires:	libmusicbrainz-devel
+BuildRequires:	libogg-devel
 BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel
+BuildRequires:	libvorbis-devel
 BuildRequires:	musepack-devel
 BuildRequires:	ninja
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
+BuildRequires:	taglib-devel
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
