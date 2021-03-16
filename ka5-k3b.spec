@@ -1,15 +1,15 @@
-%define		kdeappsver	19.04.1
+%define		kdeappsver	20.12.3
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	19.04.1
-Release:	3
+Version:	20.12.3
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	6c1900f17b3c9bdb24a15750b162f775
+Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	f2d845dc87cf059b6dbe91d5ed112624
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -22,7 +22,6 @@ BuildRequires:	flac-c++-devel
 BuildRequires:	ka5-libkcddb-devel
 BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
 BuildRequires:	kf5-karchive-devel
-BuildRequires:	kf5-kcmutils-devel
 BuildRequires:	kf5-kcmutils-devel
 BuildRequires:	kf5-kconfig-devel
 BuildRequires:	kf5-kcoreaddons-devel
@@ -115,7 +114,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
-/etc/xdg/k3btheme.knsrc
 %attr(755,root,root) %{_bindir}/k3b
 %attr(755,root,root) %ghost %{_libdir}/libk3bdevice.so.7
 %attr(755,root,root) %{_libdir}/libk3bdevice.so.*.*.*
@@ -189,6 +187,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/solid/actions/k3b_create_audio_cd_from_blank_medium.desktop
 %{_datadir}/solid/actions/k3b_create_data_project_from_blank_medium.desktop
 %{_datadir}/solid/actions/k3b_videodvd_rip.desktop
+%attr(755,root,root) %{_prefix}/libexec/kauth/k3bhelper
+%{_datadir}/dbus-1/system-services/org.kde.k3b.service
+%{_datadir}/dbus-1/system.d/org.kde.k3b.conf
+%{_datadir}/polkit-1/actions/org.kde.k3b.policy
+%{_datadir}/knsrcfiles/k3btheme.knsrc
 
 %files devel
 %defattr(644,root,root,755)
