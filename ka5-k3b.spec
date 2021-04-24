@@ -1,15 +1,15 @@
-%define		kdeappsver	20.12.3
+%define		kdeappsver	21.04.0
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	20.12.3
+Version:	21.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	f2d845dc87cf059b6dbe91d5ed112624
+# Source0-md5:	9070bf36cd6395eaefdc38728c89849b
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -115,9 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/k3b
-%attr(755,root,root) %ghost %{_libdir}/libk3bdevice.so.7
+%ghost %{_libdir}/libk3bdevice.so.7
 %attr(755,root,root) %{_libdir}/libk3bdevice.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libk3blib.so.7
+%ghost %{_libdir}/libk3blib.so.7
 %attr(755,root,root) %{_libdir}/libk3blib.so.*.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/k3baudiometainforenamerplugin.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/k3baudioprojectcddbplugin.so
@@ -313,5 +313,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/k3bvideodvdtitletranscodingjob.h
 %{_includedir}/k3bvideodvdvideostream.h
 %{_includedir}/k3bwavefilewriter.h
-%attr(755,root,root) %{_libdir}/libk3bdevice.so
-%attr(755,root,root) %{_libdir}/libk3blib.so
+%{_libdir}/libk3bdevice.so
+%{_libdir}/libk3blib.so
