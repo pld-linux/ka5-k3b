@@ -74,6 +74,22 @@ The CD Kreator features:
  - Support for ATAPI drives without SCSI-emulation for reading
  - integrated full featured audio player
 
+%description -l pl.UTF-8
+Kreator CD oferuje:
+ - najbardziej przyjazny interfejs użytkownika
+ - zapisywanie Audio-CD
+ - zapisywanie ISO-CD
+ - zapisywanie istniejących obrazów ISO na CD
+ - kopiowanie płyt (dane, audio, tryb mieszany)
+ - czyszczenie płyt CD-RW
+ - "rippowanie" CD do WAWów
+ - "rippowanie" DVD z użyciem transkodujących narzędzi
+ - kodowanie DivX/XviD
+ - K3b sprawdza czy użytkownik włożył pustą płytę
+ - odczytywanie informacje o płycie CD i spisu treści
+ - wspiera napędy ATAPI bez emulacji SCSI do odczytu
+ - zintegrowany odtwarzacz audio
+
 %package devel
 Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
