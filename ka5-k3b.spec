@@ -1,15 +1,15 @@
-%define		kdeappsver	21.12.2
+%define		kdeappsver	21.12.3
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	21.12.2
+Version:	21.12.3
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	63170da506183de744ce2e1011bd5d00
+# Source0-md5:	cc97f36685cab1df6301ce437f0be340
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
