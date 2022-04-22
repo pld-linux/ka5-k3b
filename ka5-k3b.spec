@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	21.12.3
+%define		kdeappsver	22.04.0
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	21.12.3
+Version:	22.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	cc97f36685cab1df6301ce437f0be340
+# Source0-md5:	b79d44e54a70c0080c268d35788d66b5
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -144,10 +144,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libk3bdevice.so.*.*.*
 %ghost %{_libdir}/libk3blib.so.7
 %attr(755,root,root) %{_libdir}/libk3blib.so.*.*.*
-%attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3bexternalencoder.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3blameencoder.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3boggvorbisencoder.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/kcm_k3bsoxencoder.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/kio/videodvd.so
 %{_desktopdir}/org.kde.k3b.desktop
 %{_iconsdir}/hicolor/128x128/apps/k3b.png
@@ -170,10 +166,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/ServiceMenus/k3b_create_video_cd.desktop
 %{_datadir}/kservices5/ServiceMenus/k3b_write_bin_image.desktop
 %{_datadir}/kservices5/ServiceMenus/k3b_write_iso_image.desktop
-%{_datadir}/kservices5/kcm_k3bexternalencoder.desktop
-%{_datadir}/kservices5/kcm_k3blameencoder.desktop
-%{_datadir}/kservices5/kcm_k3boggvorbisencoder.desktop
-%{_datadir}/kservices5/kcm_k3bsoxencoder.desktop
 %{_datadir}/kservicetypes5/k3bplugin.desktop
 %dir %{_datadir}/kxmlgui5/k3b
 %{_datadir}/kxmlgui5/k3b/k3bdeviceui.rc
@@ -194,7 +186,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/plugins/k3b/k3baudiometainforenamerplugin.so
 %{_libdir}/qt5/plugins/k3b/k3baudioprojectcddbplugin.so
 %{_libdir}/qt5/plugins/k3b/k3bexternalencoder.so
-%{_libdir}/qt5/plugins/k3b/k3bffmpegdecoder.so
 %{_libdir}/qt5/plugins/k3b/k3bflacdecoder.so
 %{_libdir}/qt5/plugins/k3b/k3blameencoder.so
 %{_libdir}/qt5/plugins/k3b/k3blibsndfiledecoder.so
@@ -204,6 +195,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/plugins/k3b/k3boggvorbisencoder.so
 %{_libdir}/qt5/plugins/k3b/k3bsoxencoder.so
 %{_libdir}/qt5/plugins/k3b/k3bwavedecoder.so
+%{_libdir}/qt5/plugins/k3b/kcms/kcm_k3bexternalencoder.so
+%{_libdir}/qt5/plugins/k3b/kcms/kcm_k3blameencoder.so
+%{_libdir}/qt5/plugins/k3b/kcms/kcm_k3boggvorbisencoder.so
+%{_libdir}/qt5/plugins/k3b/kcms/kcm_k3bsoxencoder.so
 
 %files devel
 %defattr(644,root,root,755)
