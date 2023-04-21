@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.12.3
+%define		kdeappsver	23.04.0
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	22.12.3
-Release:	3
+Version:	23.04.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	e7f00fccb5be7a05c37c97ee32317b4e
+# Source0-md5:	859fd21e0a0a8a1ae92ba2536f0d51a7
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -217,6 +217,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/system.d/org.kde.k3b.conf
 %{_datadir}/polkit-1/actions/org.kde.k3b.policy
 %{_datadir}/knsrcfiles/k3btheme.knsrc
+%{_datadir}/qlogging-categories5/k3b.categories
 
 %files devel
 %defattr(644,root,root,755)
