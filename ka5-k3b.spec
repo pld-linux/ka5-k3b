@@ -1,59 +1,58 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	23.08.4
+%define		kdeappsver	24.01.95
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		k3b
 Summary:	K3b - CD Kreator
 Name:		ka5-%{kaname}
-Version:	23.08.4
-Release:	1
+Version:	24.01.95
+Release:	0.1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
-Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	220681a030548bdf3a660c0c4de7f441
+Source0:	https://download.kde.org/unstable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	6014a320865012984281bec9ac0ccd67
 Patch0:		musepack.patch
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= %{qtver}
-BuildRequires:	Qt5DBus-devel >= %{qtver}
-BuildRequires:	Qt5Gui-devel >= %{qtver}
-BuildRequires:	Qt5WebKit-devel
+BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt6DBus-devel >= %{qtver}
+BuildRequires:	Qt6Gui-devel >= %{qtver}
 BuildRequires:	cmake >= 3.20
 BuildRequires:	ffmpeg-devel
 BuildRequires:	flac-c++-devel
 BuildRequires:	ka5-libkcddb-devel
-BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
-BuildRequires:	kf5-karchive-devel
-BuildRequires:	kf5-kcmutils-devel
-BuildRequires:	kf5-kconfig-devel
-BuildRequires:	kf5-kcoreaddons-devel
-BuildRequires:	kf5-kdoctools-devel
-BuildRequires:	kf5-kfilemetadata-devel
-BuildRequires:	kf5-ki18n-devel
-BuildRequires:	kf5-kiconthemes-devel
-BuildRequires:	kf5-kio-devel
-BuildRequires:	kf5-kjobwidgets-devel
-BuildRequires:	kf5-knewstuff-devel
-BuildRequires:	kf5-knotifications-devel
-BuildRequires:	kf5-knotifyconfig-devel
-BuildRequires:	kf5-kservice-devel
-BuildRequires:	kf5-kwidgetsaddons-devel
-BuildRequires:	kf5-kxmlgui-devel
-BuildRequires:	kf5-solid-devel
+BuildRequires:	kf6-extra-cmake-modules >= %{kframever}
+BuildRequires:	kf6-karchive-devel
+BuildRequires:	kf6-kcmutils-devel
+BuildRequires:	kf6-kconfig-devel
+BuildRequires:	kf6-kcoreaddons-devel
+BuildRequires:	kf6-kdoctools-devel
+BuildRequires:	kf6-kfilemetadata-devel
+BuildRequires:	kf6-ki18n-devel
+BuildRequires:	kf6-kiconthemes-devel
+BuildRequires:	kf6-kio-devel
+BuildRequires:	kf6-kjobwidgets-devel
+BuildRequires:	kf6-knewstuff-devel
+BuildRequires:	kf6-knotifications-devel
+BuildRequires:	kf6-knotifyconfig-devel
+BuildRequires:	kf6-kservice-devel
+BuildRequires:	kf6-kwidgetsaddons-devel
+BuildRequires:	kf6-kxmlgui-devel
+BuildRequires:	kf6-solid-devel
 BuildRequires:	lame-libs-devel
 BuildRequires:	libdvdread-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libmpcdec-devel
-BuildRequires:	libmusicbrainz-devel
+#BuildRequires:	libmusicbrainz-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	musepack-devel
 BuildRequires:	ninja
-BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	qt6-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	taglib-devel
@@ -128,7 +127,9 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	-DQT_MAJOR_VERSION=6 \
+	-DK3B_ENABLE_MUSICBRAINZ=OFF
 %ninja_build -C build
 
 %if %{with tests}
@@ -152,34 +153,35 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/k3b
 %ghost %{_libdir}/libk3bdevice.so.8
-%attr(755,root,root) %{_libdir}/libk3bdevice.so.*.*.*
+%attr(755,root,root) %{_libdir}/libk3bdevice.so.*.*
 %ghost %{_libdir}/libk3blib.so.8
-%attr(755,root,root) %{_libdir}/libk3blib.so.*.*.*
-%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/kio/videodvd.so
-%attr(755,root,root) %{_prefix}/libexec/kauth/k3bhelper
-%dir %{_libdir}/qt5/plugins/k3b_plugins
-%{_libdir}/qt5/plugins/k3b_plugins/k3baudiometainforenamerplugin.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3baudioprojectcddbplugin.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bexternalencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bflacdecoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3blameencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3blibsndfiledecoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bmaddecoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bmpcdecoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3boggvorbisdecoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3boggvorbisencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bsoxencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bwavedecoder.so
-%dir %{_libdir}/qt5/plugins/k3b_plugins/kcms
-%{_libdir}/qt5/plugins/k3b_plugins/kcms/kcm_k3bexternalencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/kcms/kcm_k3blameencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/kcms/kcm_k3boggvorbisencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/kcms/kcm_k3bsoxencoder.so
-%{_libdir}/qt5/plugins/k3b_plugins/k3bffmpegdecoder.so
+%attr(755,root,root) %{_libdir}/libk3blib.so.*.*
+%dir %{_libdir}/qt6/plugins/k3b_plugins
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3baudiometainforenamerplugin.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3baudioprojectcddbplugin.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bexternalencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bffmpegdecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bflacdecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3blameencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3blibsndfiledecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bmaddecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bmpcdecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3boggvorbisdecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3boggvorbisencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bsoxencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/k3bwavedecoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/kcms/kcm_k3bexternalencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/kcms/kcm_k3blameencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/kcms/kcm_k3boggvorbisencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/k3b_plugins/kcms/kcm_k3bsoxencoder.so
+%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/kio/videodvd.so
+%attr(755,root,root) %{_prefix}/libexec/kf6/kauth/k3bhelper
 
 %files data -f %{kaname}.lang
 %defattr(644,root,root,755)
 %{_desktopdir}/org.kde.k3b.desktop
+%{_datadir}/dbus-1/system-services/org.kde.k3b.service
+%{_datadir}/dbus-1/system.d/org.kde.k3b.conf
 %{_iconsdir}/hicolor/128x128/apps/k3b.png
 %{_iconsdir}/hicolor/128x128/mimetypes/application-x-k3b.png
 %{_iconsdir}/hicolor/16x16/apps/k3b.png
@@ -193,29 +195,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/scalable/apps/k3b.svgz
 %{_iconsdir}/hicolor/scalable/mimetypes/application-x-k3b.svgz
 %{_datadir}/k3b
-%{_datadir}/knotifications5/k3b.notifyrc
+%{_datadir}/kio/servicemenus/k3b_create_audio_cd.desktop
+%{_datadir}/kio/servicemenus/k3b_create_data_project.desktop
+%{_datadir}/kio/servicemenus/k3b_create_video_cd.desktop
+%{_datadir}/kio/servicemenus/k3b_write_bin_image.desktop
+%{_datadir}/kio/servicemenus/k3b_write_iso_image.desktop
+%{_datadir}/knotifications6/k3b.notifyrc
+%{_datadir}/knsrcfiles/k3btheme.knsrc
 %{_datadir}/konqsidebartng/virtual_folders/services/videodvd.desktop
-%{_datadir}/kservices5/ServiceMenus/k3b_create_audio_cd.desktop
-%{_datadir}/kservices5/ServiceMenus/k3b_create_data_project.desktop
-%{_datadir}/kservices5/ServiceMenus/k3b_create_video_cd.desktop
-%{_datadir}/kservices5/ServiceMenus/k3b_write_bin_image.desktop
-%{_datadir}/kservices5/ServiceMenus/k3b_write_iso_image.desktop
-%{_datadir}/kservicetypes5/k3bplugin.desktop
-%dir %{_datadir}/kxmlgui5/k3b
-%{_datadir}/kxmlgui5/k3b/k3bdeviceui.rc
-%{_datadir}/kxmlgui5/k3b/k3bui.rc
 %{_datadir}/metainfo/org.kde.k3b.appdata.xml
 %{_datadir}/mime/packages/x-k3b.xml
+%{_datadir}/polkit-1/actions/org.kde.k3b.policy
+%{_datadir}/qlogging-categories6/k3b.categories
 %{_datadir}/solid/actions/k3b_audiocd_rip.desktop
 %{_datadir}/solid/actions/k3b_copy_disc.desktop
 %{_datadir}/solid/actions/k3b_create_audio_cd_from_blank_medium.desktop
 %{_datadir}/solid/actions/k3b_create_data_project_from_blank_medium.desktop
 %{_datadir}/solid/actions/k3b_videodvd_rip.desktop
-%{_datadir}/dbus-1/system-services/org.kde.k3b.service
-%{_datadir}/dbus-1/system.d/org.kde.k3b.conf
-%{_datadir}/polkit-1/actions/org.kde.k3b.policy
-%{_datadir}/knsrcfiles/k3btheme.knsrc
-%{_datadir}/qlogging-categories5/k3b.categories
 
 %files devel
 %defattr(644,root,root,755)
