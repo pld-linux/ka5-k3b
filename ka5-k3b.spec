@@ -120,7 +120,7 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 
 %prep
 %setup -q -n %{kaname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %cmake \
