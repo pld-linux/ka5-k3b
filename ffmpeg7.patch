@@ -1,0 +1,82 @@
+--- k3b-23.08.5/plugins/decoder/ffmpeg/k3bffmpegwrapper.cpp	2024-02-09 23:38:00.000000000 +0100
++++ k3b-26.08.2/plugins/decoder/ffmpeg/k3bffmpegwrapper.cpp	2026-10-06 06:12:26.000000000 +0200
+@@ -79,14 +79,14 @@
+     close();
+ 
+     // open the file
+-    int err = ::avformat_open_input( &d->formatContext, m_filename.toLocal8Bit(), 0, 0 );
++    int err = ::avformat_open_input( &d->formatContext, m_filename.toLocal8Bit(), nullptr, nullptr );
+     if( err < 0 ) {
+         qDebug() << "(K3bFFMpegFile) unable to open " << m_filename << " with error " << err;
+         return false;
+     }
+ 
+     // analyze the streams
+-    ::avformat_find_stream_info( d->formatContext, 0 );
++    ::avformat_find_stream_info( d->formatContext, nullptr );
+ 
+     // we only handle files containing one audio stream
+     if( d->formatContext->nb_streams == 1 ) {
+@@ -124,7 +124,7 @@
+ 
+     // open the codec on our context
+     qDebug() << "(K3bFFMpegFile) found codec for " << m_filename;
+-    if( ::avcodec_open2( d->codecContext, d->codec, 0 ) < 0 ) {
++    if( ::avcodec_open2( d->codecContext, d->codec, nullptr ) < 0 ) {
+         qDebug() << "(K3bFFMpegDecoderFactory) could not open codec.";
+         return false;
+     }
+@@ -139,8 +139,15 @@
+     }
+ 
+     d->sampleFormat = d->codecContext->sample_fmt;
++#if LIBAVCODEC_VERSION_MAJOR < 61
+     d->isSpacious = ::av_sample_fmt_is_planar(d->sampleFormat) &&
+         d->codecContext->channels > 1;
++#else
++#ifdef __GNUC__
++#warning Unimplemented for libavcodec version >= 61
++#endif
++    d->isSpacious = ::av_sample_fmt_is_planar(d->sampleFormat);
++#endif
+     d->packet = ::av_packet_alloc();
+ 
+     // dump some debugging info
+@@ -156,7 +163,11 @@
+     ::av_packet_free(&d->packet);
+ 
+     if( d->codec ) {
++#if LIBAVCODEC_VERSION_MAJOR >= 60
++        ::avcodec_free_context(&d->codecContext);
++#else
+         ::avcodec_close(d->codecContext);
++#endif
+         d->codec = nullptr;
+         ::avcodec_free_context(&d->codecContext);
+         d->codecContext = nullptr;
+@@ -185,7 +196,14 @@
+ 
+ int K3bFFMpegFile::channels() const
+ {
++#if LIBAVCODEC_VERSION_MAJOR < 61
+     return d->codecContext->channels;
++#else
++#ifdef __GNUC__
++#warning Unimplemented for libavcodec version >= 61
++#endif
++    return 0;
++#endif
+ }
+ 
+ 
+@@ -356,8 +374,8 @@
+ {
+     d->outputBufferSize = 0;
+ 
+-    double seconds = (double)msf.totalFrames()/75.0;
+-    quint64 timestamp = (quint64)(seconds * (double)AV_TIME_BASE);
++    double seconds = double(msf.totalFrames())/75.0;
++    quint64 timestamp = quint64(seconds * double(AV_TIME_BASE));
+ 
+     // FIXME: do we really need the start_time and why?
+     return ( ::av_seek_frame( d->formatContext, -1, timestamp + d->formatContext->start_time, 0 ) >= 0 );
